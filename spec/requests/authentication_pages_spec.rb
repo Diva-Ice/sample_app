@@ -39,10 +39,7 @@ describe "Authentication" do
       it { should_not have_link('Sign in', href: signin_path) }
     end
 
-    describe "followed by signout" do
-      before { click_link "Sign out" }
-      it { should have_link('Sign in') }
-    end
+    
   end
   describe "authorization" do
 
@@ -72,6 +69,10 @@ describe "Authentication" do
               before { delete user_path(user) }
               specify { expect(response).to redirect_to(root_url) }
             end
+          end
+          describe "followed by signout" do
+            before { click_link "Sign out" }
+            it { should have_link('Sign in') }
           end
           describe "in the Microposts controller" do
 
